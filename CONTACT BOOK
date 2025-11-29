@@ -1,0 +1,56 @@
+# Contact Book Application
+
+class Contact:
+    def __init__(self, name, phone, email, address):
+        self.name = name
+        self.phone = phone
+        self.email = email
+        self.address = address
+
+    def __str__(self):
+        return f"Name: {self.name}\nPhone: {self.phone}\nEmail: {self.email}\nAddress: {self.address}"
+
+
+class ContactBook:
+    def __init__(self):
+        self.contacts = []
+
+    def add_contact(self):
+        name = input("Enter name: ")
+        phone = input("Enter phone number: ")
+        email = input("Enter email: ")
+        address = input("Enter address: ")
+        contact = Contact(name, phone, email, address)
+        self.contacts.append(contact)
+        print("\n✅ Contact added successfully!\n")
+
+    def view_contacts(self):
+        if not self.contacts:
+            print("\nNo contacts found.\n")
+            return
+        print("\n📒 Contact List:")
+        for i, contact in enumerate(self.contacts, start=1):
+            print(f"{i}. {contact.name} - {contact.phone}")
+        print()
+
+    def search_contact(self):
+        search = input("Enter name or phone number to search: ")
+        found = False
+        for contact in self.contacts:
+            if contact.name.lower() == search.lower() or contact.phone == search:
+                print("\n🔍 Contact Found:\n")
+                print(contact)
+                found = True
+                break
+        if not found:
+            print("\nNo contact found with that detail.\n")
+
+    def update_contact(self):
+        search = input("Enter name of the contact to update: ")
+        for contact in self.contacts:
+            if contact.name.lower() == search.lower():
+                print("\nEnter new details (leave blank to keep current):")
+                name = input(f"Name ({contact.name}): ") or contact.name
+                phone = input(f"Phone ({contact.phone}): ") or contact.phone
+                email = input(f"Email ({contact.email}): ") or contact.email
+                address = input(f"Address ({contact
